@@ -17,3 +17,4 @@
 
 4. **Start working** on the kanban board and projects inside your house folder!
 5. Add collaborators to your forked repository. See https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/repository-access-and-collaboration/inviting-collaborators-to-a-personal-repository
+6. How to work on a Repo as a team: https://dev.to/gladyspascual/a-beginner-s-guide-to-using-git-when-working-with-a-team-for-the-first-time-1hba
