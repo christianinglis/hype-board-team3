@@ -7,10 +7,12 @@ let posts = [];
 
 const STORAGE_KEY = "hypeboard_v1";
 
+//Saves posts to storage (json file)
 function savePosts() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
 }
 
+//Loads posts from storage (searches through json file and finds posts with matching keys)
 function loadPosts() {
   const stored = localStorage.getItem("hypeboard");
   if (stored) {
@@ -26,15 +28,19 @@ const categoryLabels = {
   life:       "✨ Life",
 };
 
+//Returns category of post from category labels
 function getCategoryLabel(cat) {
   return categoryLabels[cat] || cat;
 }
 
+//Returns the selected value (all, or category) from the dropdown selection
 function getCurrentFilter() {
   return document.getElementById("filter-select").value;
 }
 
 // ── Render ────────────────────────────────────
+
+//Renders the posts based on the current selected filter
 function renderPosts(filter = "all") {
   const container = document.getElementById("cards-container");
   container.innerHTML = "";
@@ -85,6 +91,8 @@ function renderPosts(filter = "all") {
 }
 
 // ── Add Post ──────────────────────────────────
+
+//Adds a new post when the user posts one
 function addPost(author, message, category) {
   const newPost = {
     author: author,
