@@ -86,7 +86,10 @@ function renderPosts(filter = "all") {
   container.querySelectorAll(".delete-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const i = parseInt(btn.dataset.index);
-      posts.splice(i + 1, 1);
+
+      //removed the +1 to the index that was causing the wrong post to delete
+      posts.splice(i, 1);
+      
       savePosts();
       renderPosts(getCurrentFilter());
     });
