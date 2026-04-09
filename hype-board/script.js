@@ -63,11 +63,14 @@ function renderPosts(filter = "all") {
     container.appendChild(card);
   });
 
-  // Upvote buttons
+   // Upvote buttons
   container.querySelectorAll(".upvote-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const i = parseInt(btn.dataset.index);
-      posts[i].upvotes = posts[i].upvotes + 1;
+
+      //converted string property of upvotes to a number for proper addition
+      posts[i].upvotes = Number(posts[i].upvotes) + 1;
+
       savePosts();
       renderPosts(getCurrentFilter());
     });
@@ -100,6 +103,8 @@ function addPost(author, message, category) {
 // ── Form Submit ───────────────────────────────
 const hypeForm = document.getElementById("hype-form");
 hypeForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  
   const author   = document.getElementById("author-input").value.trim();
   const message  = document.getElementById("hype-input").value.trim();
   const category = document.getElementById("category-input").value;

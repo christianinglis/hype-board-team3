@@ -181,12 +181,8 @@ button[type="submit"]:hover {
 }
 
 /* ── Cards Container ───────────────────────── */
-/*
-  Something looks off here — cards aren't laying out the way they should.
-  They appear to all be the same width and stack awkwardly.
-*/
 #cards-container {
-  display: flex;
+  display: grid;
   gap: 1rem;
 }
 
@@ -264,6 +260,38 @@ button[type="submit"]:hover {
 .upvote-btn:hover {
   border-color: var(--accent);
   color: var(--accent);
+}
+
+@media (max-width: 767px) {
+  main {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .form-panel {
+    position: static;
+    top: auto;
+  }
+
+  .form-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .form-footer select,
+  .form-footer button {
+    width: 100%;
+  }
+
+  .board-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  #cards-container {
+    grid-template-columns: 1fr;
+  }
 }
 
 .delete-btn {
