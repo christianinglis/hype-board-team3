@@ -100,6 +100,8 @@ function addPost(author, message, category) {
 // ── Form Submit ───────────────────────────────
 const hypeForm = document.getElementById("hype-form");
 hypeForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  
   const author   = document.getElementById("author-input").value.trim();
   const message  = document.getElementById("hype-input").value.trim();
   const category = document.getElementById("category-input").value;
