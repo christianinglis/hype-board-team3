@@ -73,7 +73,10 @@ function renderPosts(filter = "all") {
   container.querySelectorAll(".upvote-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
       const i = parseInt(btn.dataset.index);
-      posts[i].upvotes = posts[i].upvotes + 1;
+
+      //converted string property of upvotes to a number for proper addition
+      posts[i].upvotes = Number(posts[i].upvotes) + 1;
+
       savePosts();
       renderPosts(getCurrentFilter());
     });
