@@ -59,10 +59,10 @@ function renderPosts(filter = "all") {
       </div>
       <p class="card-message">${post.message}</p>
       <div class="card-bottom">
-        <button class="upvote-btn" data-index="${index}">
+        <button class="upvote-btn" data-index="${index}" title="Upvote this post">
           🔥 <span class="upvote-count">${post.upvotes}</span>
         </button>
-        <button class="delete-btn" data-index="${index}" title="Delete">🗑️</button>
+        <button class="delete-btn" data-index="${index}" title="Delete this post">🗑️</button>
       </div>
     `;
 

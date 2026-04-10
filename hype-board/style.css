@@ -153,6 +153,72 @@ button[type="submit"] {
   cursor: pointer;
   white-space: nowrap;
   transition: transform 0.1s, opacity 0.15s;
+  position: relative;
+}
+
+input[title],
+textarea[title],
+button[title] {
+  position: relative;
+}
+
+input[title]::after,
+textarea[title]::after,
+button[title]::after {
+  content: attr(title);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 0.75rem);
+  transform: translateX(-50%) translateY(0.25rem);
+  background: rgba(18, 18, 18, 0.95);
+  color: #fff;
+  padding: 0.45rem 0.65rem;
+  border-radius: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  z-index: 5;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
+}
+
+input[title]::before,
+textarea[title]::before,
+button[title]::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 0.45rem);
+  width: 0.5rem;
+  height: 0.5rem;
+  background: rgba(18, 18, 18, 0.95);
+  transform: translateX(-50%) rotate(45deg);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+  z-index: 5;
+}
+
+input[title]:hover::after,
+input[title]:focus-visible::after,
+textarea[title]:hover::after,
+textarea[title]:focus-visible::after,
+button[title]:hover::after,
+button[title]:focus-visible::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-0.25rem);
+}
+
+input[title]:hover::before,
+input[title]:focus-visible::before,
+textarea[title]:hover::before,
+textarea[title]:focus-visible::before,
+button[title]:hover::before,
+button[title]:focus-visible::before {
+  opacity: 1;
 }
 
 button[type="submit"]:hover {
