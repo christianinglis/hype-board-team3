@@ -115,6 +115,8 @@ function addPost(author, message, category) {
     posts.unshift(newPost);
     savePosts();
     renderPosts(getCurrentFilter());
+  } else{
+    throw new Error("Board is full! Delete a post to make room.")
   }
 }
 
