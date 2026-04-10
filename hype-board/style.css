@@ -186,8 +186,10 @@ button[type="submit"]:hover {
   They appear to all be the same width and stack awkwardly.
 */
 #cards-container {
-  display: flex;
+  display: grid;
   gap: 1rem;
+  grid-template-columns: repeat(2, minmax(200px, 1fr));
+
 }
 
 /* ── Hype Card ─────────────────────────────── */
@@ -204,10 +206,10 @@ button[type="submit"]:hover {
   transition: border-color 0.2s, transform 0.15s;
 }
 
-.hype-card[data-value="Motivation"] {color: #F4CA16; }
-.hype-card[data-value="Sports"] {color: #184CA1; }
-.hype-card[data-value="Academics"] {color: #F26222; }
-.hype-card[data-value="Life"] {color: #9A5FAB; }
+.hype-card[data-value="Motivation"] {border-left-color: #F4CA16; }
+.hype-card[data-value="Sports"] {border-left-color: #184CA1; }
+.hype-card[data-value="Academics"] {border-left-color: #F26222; }
+.hype-card[data-value="Life"] {border-left-color: #9A5FAB; }
 
 .hype-card:hover {
   transform: translateY(-2px);
