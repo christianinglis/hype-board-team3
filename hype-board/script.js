@@ -14,7 +14,7 @@ function savePosts() {
 
 //Loads posts from storage (searches through json file and finds posts with matching keys)
 function loadPosts() {
-  const stored = localStorage.getItem("hypeboard_v1");
+  const stored = localStorage.getItem("hypeboard");
   if (stored) {
     posts = JSON.parse(stored);
   }
@@ -88,7 +88,7 @@ function renderPosts(filter = "all") {
 
       //added a prompt to confirm post deletion 
       let query = prompt("Are you sure you would like to delete this post? Y/N")
-      if (query.toLowerCase == "y" || query.toLowerCase() == "yes"){
+      if (query.toLowerCase() == "y" || query.toLowerCase() == "yes"){
         const i = parseInt(btn.dataset.index);
 
         //removed the +1 to the index that was causing the wrong post to delete
@@ -111,9 +111,11 @@ function addPost(author, message, category) {
     category: category,
     upvotes: "0",
   };
-  posts.unshift(newPost);
-  savePosts();
-  renderPosts(getCurrentFilter());
+  if (posts.length < 20){
+    posts.unshift(newPost);
+    savePosts();
+    renderPosts(getCurrentFilter());
+  }
 }
 
 // ── Form Submit ───────────────────────────────
