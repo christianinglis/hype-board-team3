@@ -88,7 +88,7 @@ function renderPosts(filter = "all") {
 
       //added a prompt to confirm post deletion 
       let query = prompt("Are you sure you would like to delete this post? Y/N")
-      if (query.toLowerCase == "y" || query.toLowerCase() == "yes"){
+      if (query.toLowerCase() == "y" || query.toLowerCase() == "yes"){
         const i = parseInt(btn.dataset.index);
 
         //removed the +1 to the index that was causing the wrong post to delete
