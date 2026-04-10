@@ -14,7 +14,7 @@ function savePosts() {
 
 //Loads posts from storage (searches through json file and finds posts with matching keys)
 function loadPosts() {
-  const stored = localStorage.getItem("hypeboard");
+  const stored = localStorage.getItem("hypeboard_v1");
   if (stored) {
     posts = JSON.parse(stored);
   }
