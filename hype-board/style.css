@@ -263,6 +263,11 @@ button[type="submit"]:hover {
   transition: border-color 0.2s, transform 0.15s;
 }
 
+.hype-card[data-value="Motivation"] {color: #F4CA16; }
+.hype-card[data-value="Sports"] {color: #184CA1; }
+.hype-card[data-value="Academics"] {color: #F26222; }
+.hype-card[data-value="Life"] {color: #9A5FAB; }
+
 .hype-card:hover {
   transform: translateY(-2px);
   border-left-color: var(--accent);
@@ -291,6 +296,11 @@ button[type="submit"]:hover {
   color: var(--muted);
   white-space: nowrap;
 }
+
+.card-badge[data-value="Motivation"] {color: #F4CA16; }
+.card-badge[data-value="Sports"] {color: #184CA1; }
+.card-badge[data-value="Academics"] {color: #F26222; }
+.card-badge[data-value="Life"] {color: #9A5FAB; }
 
 .card-message {
   font-size: 0.95rem;

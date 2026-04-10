@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+  <!-- This should be obvious but this is the root tag that literally everything goes in (Indicates That The Text Is HTML Code) -->
+
+  <!-- Establishes Meta Data and Links Connected Files -->
+   
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hype Board</title>
+    <script src="./script.js" defer></script> <!-- Moved Back to the "head" tag so peace of mind. -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap"
@@ -13,6 +18,7 @@
   </head>
   <body>
 
+    <!-- This Sets up the top of the screen, usually for titles and logos -->
     <header>
       <div class="header-inner">
         <h1>HYPE<span class="accent">BOARD</span></h1>
@@ -20,14 +26,17 @@
       </div>
     </header>
 
+    <!-- The "main" function if you would, this determines the content of the "body" section of the webapp. -->
     <main>
 
       <!-- Post Form -->
       <section class="form-panel">
         <h2 class="section-title">Drop Your Hype</h2>
         <form id="hype-form">
+
+          <!-- A container for the "field-group" -->
           <div class="field-group">
-            <label for="author-input">Your Name</label>
+            <label for="author-input">Your Name</label> <!-- Goated Movie -->
             <input
               type="text"
               id="author-input"
@@ -37,6 +46,7 @@
               required
             />
           </div>
+          <!-- Another container for the "field-group" -->
           <div class="field-group">
             <label for="hype-input">Your Message</label>
             <textarea
@@ -47,6 +57,8 @@
               required
             ></textarea>
           </div>
+
+          <!-- Container for the "form-footer" -->
           <div class="form-footer">
             <select id="category-input">
               <option value="motivation">💪 Motivation</option>
@@ -61,6 +73,8 @@
 
       <!-- Board -->
       <section class="board-panel">
+
+        <!-- Container for the "board-header" -->
         <div class="board-header">
           <h2 class="section-title">The Board</h2>
           <select id="filter-select">
@@ -71,11 +85,12 @@
             <option value="life">✨ Life</option>
           </select>
         </div>
+
+        <!-- Container for the "cards-container" -->
         <div id="cards-container"></div>
       </section>
 
     </main>
 
-    <script src="./script.js" defer></script>
   </body>
 </html>
