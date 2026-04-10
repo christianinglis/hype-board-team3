@@ -85,13 +85,18 @@ function renderPosts(filter = "all") {
   // Delete buttons
   container.querySelectorAll(".delete-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
-      const i = parseInt(btn.dataset.index);
 
-      //removed the +1 to the index that was causing the wrong post to delete
-      posts.splice(i, 1);
-      
-      savePosts();
-      renderPosts(getCurrentFilter());
+      //added a prompt to confirm post deletion 
+      let query = prompt("Are you sure you would like to delete this post? Y/N")
+      if (query.toLowerCase == "y" || query.toLowerCase() == "yes"){
+        const i = parseInt(btn.dataset.index);
+
+        //removed the +1 to the index that was causing the wrong post to delete
+        posts.splice(i, 1);
+
+        savePosts();
+        renderPosts(getCurrentFilter());
+      }
     });
   });
 }
