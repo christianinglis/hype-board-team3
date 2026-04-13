@@ -6,7 +6,7 @@
 let posts = [];
 let isNewPost = false;
 
-const STORAGE_KEY = "hypeboard_v1";
+const STORAGE_KEY = "hypeboard";
 
 //Saves posts to storage (json file)
 function savePosts() {
@@ -99,8 +99,13 @@ function renderPosts(filter = "all", sort = "newest") {
     `;
 
     container.appendChild(card);
+
+    
   });
 
+  if (posts.length == 0 || visible.length == 0) {
+      container.innerHTML = "No hype yet! Be the first. 🔥";
+    }
   // Update total upvotes display
   updateTotalUpvotes();
 
