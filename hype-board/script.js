@@ -56,6 +56,7 @@ function renderPosts(filter = "all") {
       <div class="card-top">
         <span class="card-author">${post.author}</span>
         <span class="card-badge">${getCategoryLabel(post.category)}</span>
+        <span class = "card-timestamp">${post.timestamp}</span>
       </div>
       <p class="card-message">${post.message}</p>
       <div class="card-bottom">
@@ -104,12 +105,13 @@ function renderPosts(filter = "all") {
 // ── Add Post ──────────────────────────────────
 
 //Adds a new post when the user posts one
-function addPost(author, message, category) {
+function addPost(author, message, category, timestamp) {
   const newPost = {
     author: author,
     message: message,
     category: category,
     upvotes: "0",
+    timestamp: timestamp,
   };
   if (posts.length < 20){
     posts.unshift(newPost);
@@ -129,10 +131,12 @@ hypeForm.addEventListener("submit", (e) => {
   const author   = document.getElementById("author-input").value.trim();
   const message  = document.getElementById("hype-input").value.trim();
   const category = document.getElementById("category-input").value;
+  const timestamp = new Date(Date.now());
+  
 
   if (!author || !message) return;
 
-  addPost(author, message, category);
+  addPost(author, message, category, timestamp.toString());
 
   document.getElementById("author-input").value = "";
   document.getElementById("hype-input").value = "";
