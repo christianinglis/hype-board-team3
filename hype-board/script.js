@@ -4,6 +4,7 @@
 
 // ── Data ──────────────────────────────────────
 let posts = [];
+let isNewPost = false;
 
 const STORAGE_KEY = "hypeboard_v1";
 
@@ -51,6 +52,12 @@ function renderPosts(filter = "all") {
   visible.forEach((post, index) => {
     const card = document.createElement("div");
     card.className = "hype-card";
+    
+    // Add animation class only to the first card if it's a new post
+    if (index === 0 && isNewPost) {
+      card.classList.add("new-post");
+      isNewPost = false;
+    }
 
     card.innerHTML = `
       <div class="card-top">
@@ -115,6 +122,7 @@ function addPost(author, message, category, timestamp) {
   };
   if (posts.length < 20){
     posts.unshift(newPost);
+    isNewPost = true;
     savePosts();
     renderPosts(getCurrentFilter());
   } else{
