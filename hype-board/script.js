@@ -6,7 +6,7 @@
 let posts = [];
 let isNewPost = false;
 
-const STORAGE_KEY = "hypeboard_v1";
+const STORAGE_KEY = "hypeboard";
 
 //Saves posts to storage (json file)
 function savePosts() {
@@ -109,6 +109,19 @@ function renderPosts(filter = "all") {
   });
 }
 
+// ── dynamically display character count ───────
+hypeInput = document.getElementById("hype-input");
+maxLength = document.getElementById("hype-input").maxLength;
+hypeInput.addEventListener('input', () => {
+  if((Number(maxLength) - hypeInput.value.length) <= 20){
+    document.getElementById("char-count").style.color = "red";
+  }else{
+    document.getElementById("char-count").style.color = "white";
+  }
+  document.getElementById("char-count").innerHTML = hypeInput.value.length + "/" + maxLength;
+  
+})
+
 // ── Add Post ──────────────────────────────────
 
 //Adds a new post when the user posts one
@@ -120,6 +133,11 @@ function addPost(author, message, category, timestamp) {
     upvotes: "0",
     timestamp: timestamp,
   };
+
+  //Reset the char counter
+  document.getElementById("char-count").innerHTML = "0/150"
+
+
   if (posts.length < 20){
     posts.unshift(newPost);
     isNewPost = true;
