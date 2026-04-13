@@ -59,6 +59,25 @@ header h1 .accent {
   font-size: 0.95rem;
 }
 
+.header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 2rem;
+}
+
+.header-stat {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.25rem;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.header-stat p {
+  margin: 0;
+}
+
 /* ── Main Layout ───────────────────────────── */
 main {
   max-width: 960px;
@@ -357,6 +376,15 @@ button[type="submit"]:hover {
   main {
     grid-template-columns: 1fr;
     gap: 1.5rem;
+  }
+
+  .header-flex {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-stat {
+    align-self: flex-start;
   }
 
   .form-panel {
