@@ -39,6 +39,15 @@ function getCurrentFilter() {
   return document.getElementById("filter-select").value;
 }
 
+//Calculates and displays the total upvotes across all posts
+function updateTotalUpvotes() {
+  const total = posts.reduce((sum, post) => sum + Number(post.upvotes), 0);
+  const upvotesDisplay = document.getElementById("total-upvotes");
+  if (upvotesDisplay) {
+    upvotesDisplay.textContent = `Total Hype: ${total} 🔥`;
+  }
+}
+
 // ── Render ────────────────────────────────────
 
 //Renders the posts based on the current selected filter
@@ -77,6 +86,9 @@ function renderPosts(filter = "all") {
     container.appendChild(card);
   });
 
+  // Update total upvotes display
+  updateTotalUpvotes();
+
   // Upvote buttons
   container.querySelectorAll(".upvote-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -86,6 +98,7 @@ function renderPosts(filter = "all") {
       posts[i].upvotes = Number(posts[i].upvotes) + 1;
 
       savePosts();
+      updateTotalUpvotes();
       renderPosts(getCurrentFilter());
     });
   });
@@ -103,6 +116,7 @@ function renderPosts(filter = "all") {
         posts.splice(i, 1);
 
         savePosts();
+        updateTotalUpvotes();
         renderPosts(getCurrentFilter());
       }
     });
