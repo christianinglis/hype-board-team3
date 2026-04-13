@@ -6,7 +6,7 @@
 let posts = [];
 let isNewPost = false;
 
-const STORAGE_KEY = "hypeboard_v1";
+const STORAGE_KEY = "hypeboard";
 
 //Saves posts to storage (json file)
 function savePosts() {
@@ -154,6 +154,19 @@ hypeForm.addEventListener("submit", (e) => {
 document.getElementById("filter-select").addEventListener("change", (e) => {
   renderPosts(e.target.value);
 });
+
+// ── Clear All ─────────────────────────────────
+
+let clearAll = document.getElementById("clearAll")
+clearAll.innerText = "Clear All Posts"
+
+clearAll.addEventListener("click", function(){
+  let query = prompt("Are you sure you would like to delete the whole board? Y/N")
+      if (query.toLowerCase() == "y" || query.toLowerCase() == "yes"){
+        posts = [];
+        savePosts();
+        renderPosts(getCurrentFilter())
+}})
 
 // ── Init ──────────────────────────────────────
 loadPosts();
