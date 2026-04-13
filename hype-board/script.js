@@ -155,6 +155,20 @@ document.getElementById("filter-select").addEventListener("change", (e) => {
   renderPosts(e.target.value);
 });
 
+// ── Clear All ─────────────────────────────────
+
+let clearAll = document.getElementById("clearAll")
+clearAll.innerText = "Clear All Posts"
+
+clearAll.addEventListener("click", function(){
+  let query = prompt("Are you sure you would like to delete the whole board? Y/N")
+      if (query.toLowerCase() == "y" || query.toLowerCase() == "yes"){
+        posts = [];
+        savePosts();
+        renderPosts(getCurrentFilter())
+}})
+
+
 // ── Init ──────────────────────────────────────
 loadPosts();
 renderPosts();
