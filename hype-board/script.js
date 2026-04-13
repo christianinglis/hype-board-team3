@@ -15,9 +15,14 @@ function savePosts() {
 
 //Loads posts from storage (searches through json file and finds posts with matching keys)
 function loadPosts() {
-  const stored = localStorage.getItem("hypeboard");
+  const stored = localStorage.getItem(STORAGE_KEY);
   if (stored) {
-    posts = JSON.parse(stored);
+    posts = JSON.parse(stored).map(p => ({
+      ...p,
+      upvotes: Number(p.upvotes),
+      timestamp: typeof p.timestamp === 'string' ? new Date(p.timestamp).getTime() : p.timestamp,
+      id: p.id || Date.now() + Math.random()
+    }));
   }
 }
 
@@ -39,6 +44,11 @@ function getCurrentFilter() {
   return document.getElementById("filter-select").value;
 }
 
+//Returns the selected sort value
+function getCurrentSort() {
+  return document.getElementById("sort-select").value;
+}
+
 //Calculates and displays the total upvotes across all posts
 function updateTotalUpvotes() {
   const total = posts.reduce((sum, post) => sum + Number(post.upvotes), 0);
@@ -51,12 +61,17 @@ function updateTotalUpvotes() {
 // ── Render ────────────────────────────────────
 
 //Renders the posts based on the current selected filter
-function renderPosts(filter = "all") {
+function renderPosts(filter = "all", sort = "newest") {
   const container = document.getElementById("cards-container");
   container.innerHTML = "";
 
-  const visible =
-    filter === "all" ? posts : posts.filter((p) => p.category === filter);
+  let visible = filter === "all" ? posts : posts.filter((p) => p.category === filter);
+
+  if (sort === "hype") {
+    visible = visible.sort((a, b) => b.upvotes - a.upvotes);
+  } else {
+    visible = visible.sort((a, b) => b.timestamp - a.timestamp);
+  }
 
   visible.forEach((post, index) => {
     const card = document.createElement("div");
@@ -72,14 +87,14 @@ function renderPosts(filter = "all") {
       <div class="card-top">
         <span class="card-author">${post.author}</span>
         <span class="card-badge">${getCategoryLabel(post.category)}</span>
-        <span class = "card-timestamp">${post.timestamp}</span>
+        <span class="card-timestamp">${new Date(post.timestamp).toLocaleString()}</span>
       </div>
       <p class="card-message">${post.message}</p>
       <div class="card-bottom">
-        <button class="upvote-btn" data-index="${index}" title="Upvote this post">
+        <button class="upvote-btn" data-id="${post.id}" title="Upvote this post">
           🔥 <span class="upvote-count">${post.upvotes}</span>
         </button>
-        <button class="delete-btn" data-index="${index}" title="Delete this post">🗑️</button>
+        <button class="delete-btn" data-id="${post.id}" title="Delete this post">🗑️</button>
       </div>
     `;
 
@@ -92,14 +107,14 @@ function renderPosts(filter = "all") {
   // Upvote buttons
   container.querySelectorAll(".upvote-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
-      const i = parseInt(btn.dataset.index);
-
-      //converted string property of upvotes to a number for proper addition
-      posts[i].upvotes = Number(posts[i].upvotes) + 1;
-
-      savePosts();
-      updateTotalUpvotes();
-      renderPosts(getCurrentFilter());
+      const id = parseInt(btn.dataset.id);
+      const post = posts.find(p => p.id === id);
+      if (post) {
+        post.upvotes += 1;
+        savePosts();
+        updateTotalUpvotes();
+        renderPosts(getCurrentFilter(), getCurrentSort());
+      }
     });
   });
 
@@ -110,14 +125,14 @@ function renderPosts(filter = "all") {
       //added a prompt to confirm post deletion 
       let query = prompt("Are you sure you would like to delete this post? Y/N")
       if (query.toLowerCase() == "y" || query.toLowerCase() == "yes"){
-        const i = parseInt(btn.dataset.index);
-
-        //removed the +1 to the index that was causing the wrong post to delete
-        posts.splice(i, 1);
-
-        savePosts();
-        updateTotalUpvotes();
-        renderPosts(getCurrentFilter());
+        const id = parseInt(btn.dataset.id);
+        const postIndex = posts.findIndex(p => p.id === id);
+        if (postIndex !== -1) {
+          posts.splice(postIndex, 1);
+          savePosts();
+          updateTotalUpvotes();
+          renderPosts(getCurrentFilter(), getCurrentSort());
+        }
       }
     });
   });
@@ -128,17 +143,18 @@ function renderPosts(filter = "all") {
 //Adds a new post when the user posts one
 function addPost(author, message, category, timestamp) {
   const newPost = {
+    id: Date.now(),
     author: author,
     message: message,
     category: category,
-    upvotes: "0",
+    upvotes: 0,
     timestamp: timestamp,
   };
   if (posts.length < 20){
     posts.unshift(newPost);
     isNewPost = true;
     savePosts();
-    renderPosts(getCurrentFilter());
+    renderPosts(getCurrentFilter(), getCurrentSort());
   } else{
     window.alert("Board is full! Delete a post to make room.")
     throw new Error("Board is full! Delete a post to make room.")
@@ -153,12 +169,12 @@ hypeForm.addEventListener("submit", (e) => {
   const author   = document.getElementById("author-input").value.trim();
   const message  = document.getElementById("hype-input").value.trim();
   const category = document.getElementById("category-input").value;
-  const timestamp = new Date(Date.now());
+  const timestamp = Date.now();
   
 
   if (!author || !message) return;
 
-  addPost(author, message, category, timestamp.toString());
+  addPost(author, message, category, timestamp);
 
   document.getElementById("author-input").value = "";
   document.getElementById("hype-input").value = "";
@@ -166,7 +182,12 @@ hypeForm.addEventListener("submit", (e) => {
 
 // ── Filter ────────────────────────────────────
 document.getElementById("filter-select").addEventListener("change", (e) => {
-  renderPosts(e.target.value);
+  renderPosts(e.target.value, getCurrentSort());
+});
+
+// ── Sort ──────────────────────────────────────
+document.getElementById("sort-select").addEventListener("change", (e) => {
+  renderPosts(getCurrentFilter(), e.target.value);
 });
 
 // ── Init ──────────────────────────────────────

@@ -84,13 +84,19 @@
         <!-- Container for the "board-header" -->
         <div class="board-header">
           <h2 class="section-title">The Board</h2>
-          <select id="filter-select">
-            <option value="all">All Posts</option>
-            <option value="motivation">💪 Motivation</option>
-            <option value="sports">🏆 Sports</option>
-            <option value="academics">📚 Academics</option>
-            <option value="life">✨ Life</option>
-          </select>
+          <div class="board-controls">
+            <select id="sort-select">
+              <option value="newest">Newest First</option>
+              <option value="hype">Most Hype</option>
+            </select>
+            <select id="filter-select">
+              <option value="all">All Posts</option>
+              <option value="motivation">💪 Motivation</option>
+              <option value="sports">🏆 Sports</option>
+              <option value="academics">📚 Academics</option>
+              <option value="life">✨ Life</option>
+            </select>
+          </div>
         </div>
 
         <!-- Container for the "cards-container" -->
