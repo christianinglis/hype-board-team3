@@ -21,8 +21,15 @@
     <!-- This Sets up the top of the screen, usually for titles and logos -->
     <header>
       <div class="header-inner">
-        <h1>HYPE<span class="accent">BOARD</span></h1>
-        <p class="tagline">Drop your hype. Spread the energy.</p>
+        <div class="header-flex">
+          <div>
+            <h1>HYPE<span class="accent">BOARD</span></h1>
+            <p class="tagline">Drop your hype. Spread the energy.</p>
+          </div>
+          <div class="header-stat">
+            <p id="total-upvotes">Total Hype: 0 🔥</p>
+          </div>
+        </div>
       </div>
     </header>
 
@@ -78,13 +85,19 @@
         <div class="board-header">
           <h2 class="section-title">The Board</h2>
           <button id = "clearAll"></button>
-          <select id="filter-select">
-            <option value="all">All Posts</option>
-            <option value="motivation">💪 Motivation</option>
-            <option value="sports">🏆 Sports</option>
-            <option value="academics">📚 Academics</option>
-            <option value="life">✨ Life</option>
-          </select>
+          <div class="board-controls">
+            <select id="sort-select">
+              <option value="newest">Newest First</option>
+              <option value="hype">Most Hype</option>
+            </select>
+            <select id="filter-select">
+              <option value="all">All Posts</option>
+              <option value="motivation">💪 Motivation</option>
+              <option value="sports">🏆 Sports</option>
+              <option value="academics">📚 Academics</option>
+              <option value="life">✨ Life</option>
+            </select>
+          </div>
         </div>
 
         <!-- Container for the "cards-container" -->
