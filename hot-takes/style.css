@@ -221,6 +221,11 @@ textarea {
   font-weight: 600;
   font-size: 0.85rem;
 }
+.card-date {
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-left: 0.5rem;
+}
 
 .card-category {
   font-size: 0.72rem;
@@ -259,6 +264,7 @@ textarea {
   background: var(--green);
   border-radius: 3px;
   /* BUG: no width property — should be width: var(--agree-pct, 0%) */
+  width: var(--agree-pct, 0%);
   transition: width 0.3s ease;
 }
 
@@ -308,12 +314,54 @@ textarea {
 
 .vote-btn.disagree-btn:hover { background: var(--red-dim); }
 
+/* [FEAT-01] Voted state — disable both buttons, show confirmation label */
+.vote-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.vote-btn:disabled:hover { background: none; }
+
+.you-voted-label {
+  text-align: center;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--muted);
+  padding: 0.3rem 0;
+  letter-spacing: 0.04em;
+}
+
 /* ── Card Footer ─────────────────────────────── */
 .card-footer {
   padding: 0.5rem 1rem;
   border-top: 1px solid var(--border);
   display: flex;
   justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.copy-btn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--ink);
+  font-size: 0.78rem;
+  cursor: pointer;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-family: inherit;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.copy-btn:hover {
+  background: var(--bg);
+  border-color: #bbb;
+}
+
+.copy-btn.is-copied {
+  background: var(--green-dim);
+  border-color: var(--green);
+  color: var(--green);
+  font-weight: 600;
 }
 
 .delete-btn {
@@ -339,4 +387,79 @@ textarea {
   border: 2px dashed var(--border);
   border-radius: var(--radius);
   font-size: 0.95rem;
+}
+
+/* ── Anonymous Checkbox (Feat-06) ───────────── */
+.author-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.anon-label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+  cursor: pointer;
+  user-select: none;
+}
+
+.anon-label input[type="checkbox"] {
+  width: auto;
+  display: inline;
+  padding: 0;
+  accent-color: var(--red);
+  cursor: pointer;
+}
+
+.author-wrap.is-anon #author-input {
+  display: none;
+}
+
+
+@media (max-width: 600px) {
+
+  /* Header: stack brand + stats, shrink title */
+  .header-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.85rem;
+    padding: 1rem 1.25rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  .header-stats {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  /* Form row: name + category stack vertically */
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  /* Cards: single column */
+  #takes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Board controls: stack label above selects */
+  .board-controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .controls-right {
+    width: 100%;
+  }
+
+  .controls-right select {
+    flex: 1;
+    width: auto;
+  }
 }

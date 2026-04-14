@@ -37,13 +37,18 @@
         <h2 class="section-label">DROP YOUR TAKE</h2>
         <form id="take-form">
           <div class="form-row">
-            <input
-              type="text"
-              id="author-input"
-              placeholder="Your name"
-              maxlength="30"
-              required
-            />
+            <div class="author-wrap">
+              <input
+                type="text"
+                id="author-input"
+                placeholder="Your name"
+                maxlength="30"
+              />
+              <label class="anon-label">
+                <input type="checkbox" id="anon-checkbox" />
+                Post anonymously
+              </label>
+            </div>
             <select id="category-input">
               <option value="food">🍕 Food</option>
               <option value="movies">🎬 Movies</option>
