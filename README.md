@@ -8,6 +8,7 @@
     git clone https://github.com/YOUR-USERNAME/kanban-projects.git
     cd kanban-projects
     ```
+    https://christianinglis.github.io/hype-board-team3/hype-board/index.html
 
 3. **Navigate to your Hogwarts House folder:**
     - **Gryffindor** → `hot-takes/`
